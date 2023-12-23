@@ -1,0 +1,22 @@
+extends ../main-layout.pug
+include ../includes/landing-card.pug
+
+block styles
+  link(rel="stylesheet", href="/css/landing.css")
+
+block content
+  section.banner
+    +landingCard(
+      '/images/book.svg',
+      'Lleva un registro de tus libros leidos y cumple con tus objetivos de lectura.'
+    )
+    
+    +landingCard(
+      '/images/manage.svg',
+      'No vuelvas a olvidar el libro que leiste. Realiza anotaciones de las páginas leidas.'
+    )
+
+    +landingCard(
+      '/images/cloud.svg',
+      'Todas las funciones al alcance de un navegador. Lleva tu registro en cualquier dispositivo.'
+    )

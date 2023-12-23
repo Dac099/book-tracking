@@ -1,13 +1,18 @@
-const Book = require('./models/book');
+const express = require('express');
+const path = require('path');
+const rootDir = require('./util/rootDir');
+const userRoutes = require('./routes/user');
+const booksRoutes = require('./routes/books');
 
-const test = new Book('Libro de prueba' ,'De Bolsillo', 230, 'Carl Sagan');
-test.saveBook();
+//Setup environment
+const app = express();
+app.set('view engine', 'pug');
+app.set('views', path.join(rootDir, 'views'));
+app.use(express.static(path.join(rootDir, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
-setTimeout(() => {
-  test.saveNote('Primer capitulo', 'Me parece muy divertido', 1, 25, test.id);
-}, 500);
+//Routes
+app.use(userRoutes);
+app.use(booksRoutes);
 
-setTimeout(() => {
-  test.getBook(test.id, (book) => console.log(book));
-  test.updateBook(test.id, {title: "El mundo y sus demonios"})
-}, 2000);
+app.listen(3000);

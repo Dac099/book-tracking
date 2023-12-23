@@ -1,0 +1,35 @@
+extends ../main-layout.pug
+include ../includes/book-card.pug
+
+block styles
+  link(rel="stylesheet", href="/css/lectures.css")
+
+block content
+  button#open_form(type="button") Nuevo libro
+
+  section#form_container(class="form-container")
+    form.add-book(action="/lecturas", method="post")
+      div
+        label(for="title") Titulo del libro
+        input(type="text", name="title", required, autofocus)
+
+      div
+        label(for="editorial") Editorial
+        input(type="text", name="editorial", required)
+
+      div
+        label(for="autor") Autor o autores
+        input(type="text", name="autor", required)
+
+      div
+        label(for="pages") Número de páginas
+        input(type="number", name="pages", min="1", required)
+      
+      button(type="submit") Agregar
+  
+  section.container-books(id="books-container")
+    each book in books
+      +bookCard(book.url_img, book.title, book.pages_read, book.pages, book.dateStart, book.id)
+
+block scripts
+  script(src="/js/lectures.js") 

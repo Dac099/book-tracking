@@ -1,0 +1,12 @@
+mixin bookCard(url_img, title, pages_read, pages, dateStart, bookID)
+  - const bookURL = `/lecturas/${bookID}`;
+  article.book-card
+    section.book-card__portrait
+      form(action=bookURL, method="get") 
+        button.img-btn(type="submit")
+          img(src=url_img, alt="white book")
+      p=title
+    section.book-card__details
+      -const progress = `${pages_read}/${pages}`;
+      p=progress
+      p=dateStart
